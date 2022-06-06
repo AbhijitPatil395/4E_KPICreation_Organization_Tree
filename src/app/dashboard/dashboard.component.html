@@ -1,0 +1,10 @@
+<div class="row">
+    <h4>List of KPI's</h4>
+    <div class="col-3" style="height: 30rem;overflow-y: auto;">
+        <app-view-kpi (currentId)="changeCurrentId($event)"></app-view-kpi>
+    </div>
+    <div class="col-8" style="height: 30rem;overflow-y: auto;text-align: center;">
+        <app-kpi-details #kd [kpi]="kpi"></app-kpi-details>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+
+<div *ngFor="let kpi of arrKpi" class="card" >
+    
+    <div class="card-body">
+      <!-- <h5 class="card-title">Special title treatment</h5> -->
+      <h5 class="card-header">{{kpi.title}}</h5>
+      <button type="button" (click)="onKpiDetails(kpi)"> Show Details</button>
+    </div>
+  </div>

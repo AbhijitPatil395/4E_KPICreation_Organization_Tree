@@ -1,0 +1,26 @@
+<p>kpi-details works!</p>
+
+<table *ngIf="kpi.title?true:false" class="table">
+    <thead>
+        <h3 >{{kpi.title?kpi.title:""}}</h3>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="col">Owner</td><td><b>:</b></td><td scope="col">{{kpi.ownerFirstname}}  {{kpi.ownerLastname}}</td>
+        </tr>
+        <tr>
+            <td scope="col">Owner Supervisor</td><b>:</b><td scope="col">{{kpi.ownerSupervisorId}}</td>
+        </tr>
+        <tr>
+            <td scope="col">Department</td><b>:</b><td scope="col">{{kpi.departmentName}}</td>
+        </tr>
+        <tr>
+            <td scope="col">Financial Year</td><b>:</b><td scope="col">{{kpi.financialYearStart|date:'yyyy'}}-{{kpi.financialYearEnd|date:'yyyy'}}</td>
+        </tr>
+        <tr>
+            <td scope="col">Approval Status
+            </td><b>:</b><td scope="col">{{kpi.isApproved?'Approved':'Pending'}}</td>
+        </tr>
+    </tbody>
+</table>
+<pre><h5>{{kpi|json}}</h5></pre>

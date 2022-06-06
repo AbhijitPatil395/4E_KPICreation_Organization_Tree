@@ -1,0 +1,16 @@
+td{
+    padding: 10px;
+}
+div{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+h3{
+    align-content: center;
+}
+
+select{
+    width: 390px;
+}
+.short{
+    width: 80px;
+}

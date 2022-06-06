@@ -1,0 +1,147 @@
+
+
+<h3>Enter KPI details</h3>
+<div class="row">
+  <div class="col-2">
+      
+  </div>
+  <div class="col-10">
+    <form [formGroup]="kpiForm" (ngSubmit)="onSubmit()">
+    <table>
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td><label for="title">KPI Title </label></td>
+          <td>:</td>
+          <td><input   name="title" id="title" type="text" formControlName="title"></td>
+        </tr>
+        <tr><td> <label for="reviewFreq">KPI Type: </label></td>
+          <td>:</td>
+          <td>
+            <select id="reviewFreq" formControlName="type">
+              <option *ngFor="let dept of getArrTypes()" [value]="dept._id">{{dept.type}}</option>
+            </select><br>
+          </td>
+        </tr>
+        <tr><td> <label for="reviewFreq">KPI Category: </label></td>
+          <td>:</td>
+          <td>
+            <select id="reviewFreq" formControlName="category">
+              <option *ngFor="let dept of getArrCategory()" [value]="dept._id">{{dept.category}}</option>
+            </select><br>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            <label for="department">Department: </label>
+          </td>
+          <td>:</td>
+          <td>
+            <select formControlName="departmentId">
+              <option *ngFor="let dept of getArrDepts()" [value]="dept.id">{{dept.name}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            <label for="datacapFreq">Data Capture Frequency: </label>
+          </td>
+          <td>:</td>
+          <td>
+            <select id="datacapFreq" (change)="setDataCapFreq($event)" formControlName="dataCaptureFrequency">
+              <option *ngFor="let dept of getArrDataCapFreq()" [value]="dept._id">{{dept.value}}</option>
+            </select><br>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            <label for="reviewFreq">Review Frequency: </label>
+          </td>
+          <td>:</td>
+          <td>
+            <select id="reviewFreq" formControlName="reviewFrequency">
+              <option *ngFor="let dept of getArrReviewFreq()" [value]="dept._id">{{dept.value}}</option>
+            </select><br>
+          </td>
+        </tr>
+
+        <tr><td> <label for="fianancialYear">Select Financial Year : </label></td>
+          <td>:</td>
+          <td>
+            <select id="fianancialYear" (change)="setFinancialYear($event)" formControlName="financialYearEnd">
+              <option *ngFor="let fy of getArrFinancialYears()" [value]="fy.endUnix">FY&nbsp;{{(fy.startUnix|date:'yyyy')}}&nbsp; to &nbsp;{{fy.endUnix|date:'yyyy'}}</option>
+            </select><br>
+          </td>
+        </tr>
+        <tr><td> <label for="monthRange">Select Month Range : </label></td>
+          <td>:</td>
+          <td>
+            <!-- <ng-multiselect-dropdown (onSelect)="setMonthsRange($event)" (onDeSelect)="deSelectMonthsRange($event)"
+            [settings]="dropdownSettings"
+            [data]="dropdownList">
+            </ng-multiselect-dropdown> -->
+            <ng-select #slct 
+            [items]="dropdownList"
+            bindLabel="item_text"
+            placeholder="Select Category"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selectedMonths" [ngModelOptions]="{standalone:true}"
+            (add)="setMonthsRange($event)" (remove)="deSelectMonthsRange(selectedMonths)"
+            >
+          </ng-select>
+
+          </td>
+        </tr>
+        <div formArrayName="captureData">
+          <div *ngFor="let cdata of captureData.controls; let i=index">
+            <!-- The repeated alias template -->
+            <div formGroupName="{{i}}">
+              
+              <h5>{{selectedMonths[i].item_text}}</h5>
+            Target:
+           <input class="short" id="cdata-{{ i }}" type="text" formControlName="target"/>
+           Lower:
+            <input class="short" id="cdata-{{ i +1}}" type="text" formControlName="lower"/>
+            Upper:
+            <input class="short" id="cdata-{{ i +2}}" type="text" formControlName="upper"/>
+            <button type="button" class="btn-sm-primary" (click)="removeAt(i)">Remove</button>
+          </div>
+          </div>
+        </div>
+        <tr>
+          <td> 
+            <label for="reviewFreq">Select Perspective: </label>
+          </td>
+          <td>:</td>
+          <td>
+            <select (change)="setPrefix($event)" id="reviewFreq" formControlName="perspective">
+              <option *ngFor="let dept of getArrPerspectives()" [value]="dept._id">{{dept.perspective}}</option>
+            </select><br>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            <label for="description">Description</label>
+          </td>
+          <td>:</td>
+          <td>
+            <textarea id="description" rows="3" cols="50" formControlName="goalDescription"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            <label for="description">Remark</label>
+          </td>
+          <td>:</td>
+          <td>
+            <textarea id="description" rows="1" cols="50" formControlName="remark"></textarea>
+          </td>
+        </tr>
+        <tr><td></td><td></td><td><button type="submit" class="btn btn-success">Submit</button></td></tr>
+      </tbody>
+    </table>
+    <br><hr>
+  </form>
+  </div>
+</div>
